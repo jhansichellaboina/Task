@@ -1,0 +1,5 @@
+ChatGPT said:
+
+Here’s a neat paragraph you can use in your presentation 👇
+
+The Notes App is a simple yet useful web application designed to help users quickly write, store, and manage their notes in one place. Its main purpose is to improve productivity by allowing users to save important information, reminders, or ideas without the risk of losing them. What makes this app important is that it demonstrates the core concepts of web development—HTML for structure, CSS for styling, and JavaScript for functionality—while also using localStorage to keep the notes even after refreshing the page. This shows the basic CRUD operations (Create, Read, Update, Delete), which are the foundation of almost every real-world application. Overall, it’s lightweight, works offline, and provides a practical solution for everyday note-taking needs.
