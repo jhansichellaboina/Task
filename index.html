@@ -1,50 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dream Visualizer</title>
-</head>
-<body style="text-align:center; font-family:sans-serif;">
-  <h1>Dream Visualizer</h1>
-  <input type="text" id="dreamInput" placeholder="Describe your dream" size="40">
-  <br><br>
-  <button onclick="visualizeDream()">Visualize Dream</button>
-  <br><br>
-  <img id="dreamImage" src="" alt="Your dream will appear here" width="400">
-  
-  <script>
-    async function visualizeDream() {
-      let dream = document.getElementById("dreamInput").value;
-      let img = document.getElementById("dreamImage");
-
-      img.src = ""; // clear previous
-      img.alt = "Generating your dream...";
-
-      try {
-        // Call OpenAI Images API
-        let response = await fetch("https://api.openai.com/v1/images/generations", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer YOUR_API_KEY" // Replace with your OpenAI API key
-          },
-          body: JSON.stringify({
-            model: "gpt-image-1",
-            prompt: dream,
-            size: "512x512"
-          })
-        });
-
-        let data = await response.json();
-        if (data.data && data.data[0].url) {
-          img.src = data.data[0].url;   // Show generated image
-          img.alt = dream;
-        } else {
-          img.alt = "Failed to generate image.";
-        }
-      } catch (error) {
-        img.alt = "Error: " + error.message;
-      }
+  <meta charset="UTF-8">
+  <title>🌱 Virtual Plant Friend</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #e6ffe6, #ccffcc);
+      margin: 0;
+      padding: 20px;
     }
-  </script>
-</body>
-</html>
+
+    h1 {
+      color: #2d6a4f;
+    }
+
+    #plant {
+      margin: 20px auto;
+      width: 200px;
+      height: 200px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
