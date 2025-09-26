@@ -1,32 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dream Visualizer</title>
-  <style>
-    body { font-family: Arial; display: flex; flex-direction: column; align-items: center; padding: 50px; background: #f0f0f0; }
-    input, button { padding: 10px; margin: 10px 0; width: 300px; }
-    img { margin-top: 20px; max-width: 500px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Visualizer</title>
+    <style>
+        /* ===== CSS ===== */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #ff8c00;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #ffa500;
+        }
+
+        .output {
+            margin-top: 20px;
+            min-height: 150px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #fff;
+            opacity: 0.7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #000;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <h1>Dream Visualizer</h1>
-  <input type="text" id="dreamText" placeholder="Describe your dream...">
-  <button onclick="generateDream()">Visualize Dream</button>
-  <img id="dreamImage" src="" alt="Your dream will appear here">
+    <!-- ===== HTML ===== -->
+    <div class="container">
+        <h1>Dream Visualizer</h1>
+        <textarea id="dreamInput" placeholder="Describe your dream here..."></textarea>
+        <button id="visualizeBtn">Visualize</button>
+        <div id="dreamOutput" class="output"></div>
+    </div>
 
-  <script>
-    async function generateDream() {
-      const text = document.getElementById('dreamText').value;
-      if(!text) return alert("Please describe your dream!");
-      
-      // Placeholder for AI image API
-      const dreamImageURL = "https://via.placeholder.com/500x300.png?text=" + encodeURIComponent(text);
+    <!-- ===== JavaScript ===== -->
+    <script>
+        const visualizeBtn = document.getElementById('visualizeBtn');
+        const dreamInput = document.getElementById('dreamInput');
+        const dreamOutput = document.getElementById('dreamOutput');
 
-      // Show generated image
-      document.getElementById('dreamImage').src = dreamImageURL;
-    }
-  </script>
-</body>
-</html>
+        visualizeBtn.addEventListener('click', () => {
+            const dreamText = dreamInput.value.trim();
+            dreamOutput.innerHTML = ''; // Clear previous visualization
+
+            if(dreamText === '') {
+                alert('Please enter your dream!');
+                return;
+            }
+
+            // Generate visual elements based on dream description
+            const words = dreamText.split(' ');
+            words.forEach(word => {
+                const circle = document.createElement('div');
+                circle.classList.add('circle');
+
+                // Random color based on word length
+                circle.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                circle.style.width = `${30 + word.length * 5}px`;
+                circle.style.height = `${30 + word.length * 5}px`;
+
+                circle.
