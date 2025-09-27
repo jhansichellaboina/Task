@@ -3,94 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Food Recommender</title>
+  <title>Food Ordering App</title>
   <style>
+    /* Reset */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #0d1117;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0d0d0d;
       color: #fff;
-      margin: 0;
-      padding: 0;
+      line-height: 1.6;
     }
+
     header {
-      padding: 20px;
-      background: #161b22;
+      background: #161616;
+      padding: 15px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    header h1 { color: #ff6961; }
-    .controls {
-      display: flex;
-      gap: 10px;
+
+    header h1 {
+      color: #ff9800;
     }
-    select, input, button {
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-    }
-    button {
-      background: #ff6961;
-      color: white;
+
+    .cart {
+      background: #ff9800;
+      color: #000;
+      padding: 8px 15px;
+      border-radius: 8px;
+      font-weight: bold;
       cursor: pointer;
     }
+
     .container {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
       padding: 20px;
     }
+
     .card {
-      background: #161b22;
-      border-radius: 10px;
-      width: 200px;
-      padding: 15px;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      background: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+      transition: transform 0.2s ease;
     }
-    .card h3 { color: #ff9f43; }
-    .sidebar {
-      background: #161b22;
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      color: #ff9800;
+      margin-bottom: 8px;
+    }
+
+    .price {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #ff9800;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: #e68900;
+    }
+
+    .cart-items {
+      background: #161616;
       padding: 20px;
-      border-radius: 10px;
-      width: 250px;
+      border-radius: 12px;
+      margin: 20px;
+    }
+
+    .cart-items h2 {
+      margin-bottom: 10px;
+      color: #ff9800;
+    }
+
+    .cart-list {
+      list-style: none;
+    }
+
+    .cart-list li {
+      padding: 5px 0;
+      border-bottom: 1px solid #333;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>🍲 Food Recommender</h1>
-    <div class="controls">
-      <input type="text" placeholder="Enter ingredient...">
-      <select>
-        <option>All moods</option>
-        <option>Happy</option>
-        <option>Sad</option>
-        <option>Tired</option>
-      </select>
-      <button>Find Recipes</button>
-    </div>
+    <h1>🍔 Food Order</h1>
+    <div class="cart">🛒 Cart (<span id="cart-count">0</span>)</div>
   </header>
 
   <div class="container">
+    <!-- Food Cards -->
     <div class="card">
-      <h3>Pasta Primavera</h3>
-      <p>🍝 Mood: Happy</p>
-      <button>Details</button>
+      <img src="https://source.unsplash.com/400x300/?burger" alt="Burger">
+      <div class="card-content">
+        <h3>Cheese Burger</h3>
+        <p class="price">₹150</p>
+        <button onclick="addToCart('Cheese Burger - ₹150')">Add to Cart</button>
+      </div>
     </div>
+
     <div class="card">
-      <h3>Hot Chocolate</h3>
-      <p>☕ Mood: Cozy</p>
-      <button>Details</button>
+      <img src="https://source.unsplash.com/400x300/?pizza" alt="Pizza">
+      <div class="card-content">
+        <h3>Veg Pizza</h3>
+        <p class="price">₹250</p>
+        <button onclick="addToCart('Veg Pizza - ₹250')">Add to Cart</button>
+      </div>
     </div>
+
     <div class="card">
-      <h3>Spicy Ramen</h3>
-      <p>🍜 Mood: Tired</p>
-      <button>Details</button>
+      <img src="https://source.unsplash.com/400x300/?pasta" alt="Pasta">
+      <div class="card-content">
+        <h3>White Sauce Pasta</h3>
+        <p class="price">₹200</p>
+        <button onclick="addToCart('White Sauce Pasta - ₹200')">Add to Cart</button>
+      </div>
     </div>
-    <div class="sidebar">
-      <h2>Favorites</h2>
-      <p>No recipes yet. Add some!</p>
+
+    <div class="card">
+      <img src="https://source.unsplash.com/400x300/?icecream" alt="Ice Cream">
+      <div class="card-content">
+        <h3>Chocolate Ice Cream</h3>
+        <p class="price">₹120</p>
+        <button onclick="addToCart('Chocolate Ice Cream - ₹120')">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://source.unsplash.com/400x300/?coffee" alt="Coffee">
+      <div class="card-content">
+        <h3>Cold Coffee</h3>
+        <p class="price">₹100</p>
+        <button onclick="addToCart('Cold Coffee - ₹100')">Add to Cart</button>
+      </div>
     </div>
   </div>
+
+  <!-- Cart Section -->
+  <div class="cart-items">
+    <h2>🛒 Your Cart</h2>
+    <ul class="cart-list" id="cart-list"></ul>
+  </div>
+
+  <script>
+    let cart = [];
+    function addToCart(item) {
+      cart.push(item);
+      document.getElementById("cart-count").innerText = cart.length;
+
+      const list = document.getElementById("cart-list");
+      const li = document.createElement("li");
+      li.textContent = item;
+      list.appendChild(li);
+    }
+  </script>
 </body>
 </html>
