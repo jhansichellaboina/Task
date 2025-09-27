@@ -2,102 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🌱 Virtual Plant Friend</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Recommender</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(to bottom, #e6ffe6, #ccffcc);
+      background: #0d1117;
+      color: #fff;
       margin: 0;
+      padding: 0;
+    }
+    header {
+      padding: 20px;
+      background: #161b22;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { color: #ff6961; }
+    .controls {
+      display: flex;
+      gap: 10px;
+    }
+    select, input, button {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+    }
+    button {
+      background: #ff6961;
+      color: white;
+      cursor: pointer;
+    }
+    .container {
+      display: flex;
+      gap: 20px;
       padding: 20px;
     }
-
-    h1 {
-      color: #2d6a4f;
-    }
-
-    #plant {
-      margin: 20px auto;
+    .card {
+      background: #161b22;
+      border-radius: 10px;
       width: 200px;
-      height: 200px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
-
-    .controls {
-      margin-top: 20px;
-    }
-
-    button {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      background-color: #40916c;
-      color: white;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background-color: #1b4332;
-    }
-
-    #log {
-      margin-top: 20px;
-      font-style: italic;
-      color: #555;
+    .card h3 { color: #ff9f43; }
+    .sidebar {
+      background: #161b22;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
     }
   </style>
 </head>
 <body>
-  <h1>🌱 Your Virtual Plant Friend</h1>
-  <p>Log your mood or activities — watch your plant grow and evolve!</p>
+  <header>
+    <h1>🍲 Food Recommender</h1>
+    <div class="controls">
+      <input type="text" placeholder="Enter ingredient...">
+      <select>
+        <option>All moods</option>
+        <option>Happy</option>
+        <option>Sad</option>
+        <option>Tired</option>
+      </select>
+      <button>Find Recipes</button>
+    </div>
+  </header>
 
-  <!-- Plant image -->
-  <div id="plant"></div>
-
-  <!-- Mood/activity buttons -->
-  <div class="controls">
-    <button onclick="updatePlant('happy')">😊 Happy</button>
-    <button onclick="updatePlant('tired')">😴 Tired</button>
-    <button onclick="updatePlant('stressed')">😓 Stressed</button>
-    <button onclick="updatePlant('productive')">💪 Productive</button>
+  <div class="container">
+    <div class="card">
+      <h3>Pasta Primavera</h3>
+      <p>🍝 Mood: Happy</p>
+      <button>Details</button>
+    </div>
+    <div class="card">
+      <h3>Hot Chocolate</h3>
+      <p>☕ Mood: Cozy</p>
+      <button>Details</button>
+    </div>
+    <div class="card">
+      <h3>Spicy Ramen</h3>
+      <p>🍜 Mood: Tired</p>
+      <button>Details</button>
+    </div>
+    <div class="sidebar">
+      <h2>Favorites</h2>
+      <p>No recipes yet. Add some!</p>
+    </div>
   </div>
-
-  <p id="log">Your plant is waiting...</p>
-
-  <script>
-    let growth = 0;
-
-    // Different stages of the plant (using emojis for simplicity)
-    const stages = [
-      "🌱", // seedling
-      "🌿", // small plant
-      "🌳", // tree
-      "🌺", // flowering
-      "🌟🌴🌟" // fantasy evolution
-    ];
-
-    function updatePlant(mood) {
-      const log = document.getElementById("log");
-      const plant = document.getElementById("plant");
-
-      // Growth logic
-      if (growth < stages.length - 1) {
-        growth++;
-      }
-
-      // Display new plant stage
-      plant.textContent = stages[growth];
-
-      // Log message
-      log.textContent = `You felt ${mood}. Your plant grew into ${stages[growth]}!`;
-    }
-
-    // Initial plant stage
-    document.getElementById("plant").textContent = stages[0];
-  </script>
 </body>
 </html>
